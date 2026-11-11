@@ -103,5 +103,5 @@ ignore_missing_imports = true
 
 # google-auth and matplotlib ship partial type hints; calling into them is fine.
 [[tool.mypy.overrides]]
-module = ["youtube_studio_mcp.auth", "youtube_studio_mcp.youtube", "youtube_studio_mcp.charts"]
+module = ["youtube_studio_mcp.auth", "youtube_studio_mcp.youtube", "youtube_studio_mcp._chart_render"]
 disallow_untyped_calls = false

@@ -5,7 +5,7 @@
 ![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-blue)
 
 **Give your AI assistant your YouTube Studio data.** A local [Model Context Protocol](https://modelcontextprotocol.io)
-server for creators: your agent (Claude, Cursor, VS Code, …) can read your channel analytics, dig
+server for creators: your agent (Claude, ChatGPT desktop, Cursor, VS Code, …) can read your channel analytics, dig
 into your audience and content, build **media-kit data**, and render **ready-to-use charts**,
 straight from the official YouTube APIs.
 
@@ -97,6 +97,25 @@ claude mcp add youtube-studio -- youtube-studio-mcp
 </details>
 
 <details>
+<summary><b>ChatGPT desktop app</b></summary>
+
+In the current ChatGPT desktop app (macOS/Windows): **Settings → MCP servers → Add server**, choose
+**STDIO**, name it `youtube-studio`, set the command to the full path above, save and **Restart**.
+
+The app stores this in `~/.codex/config.toml` (shared with the Codex CLI), so you can also add:
+
+```toml
+[mcp_servers.youtube-studio]
+command = "/Users/YOU/.local/bin/youtube-studio-mcp"
+```
+
+Local servers run on the desktop app's agent (Codex) side. ChatGPT on the web and older versions of
+the desktop app only reach *remote* servers. If the tools don't show up in your chat, try a Codex
+or agent task, or fall back to `youtube-studio-mcp media-kit --out media-kit-data.json` and attach
+the file.
+</details>
+
+<details>
 <summary><b>Cursor / Windsurf / other JSON-configured clients</b></summary>
 
 Use the same `mcpServers` entry as Claude Desktop (e.g. in `~/.cursor/mcp.json`).
@@ -136,10 +155,6 @@ youtube-studio-mcp check     # calls every read-only tool against your channel
 ```
 
 Then ask your assistant something like *"Give me a check-up of my channel for the last 28 days."*
-
-> **ChatGPT:** ChatGPT connects to *remote* MCP servers over HTTPS, not local ones like this. Use
-> a local MCP client (Claude Desktop, Claude Code, Cursor, VS Code…), or generate the data with
-> `youtube-studio-mcp media-kit --out media-kit-data.json` and give the file to ChatGPT.
 
 ## Media kits
 
@@ -258,7 +273,7 @@ expecting this project.
 ## Roadmap
 
 - Publish to PyPI and the MCP Registry under a free name
-- Optional Streamable-HTTP transport for remote/hosted setups
+- Optional Streamable-HTTP transport for remote setups (ChatGPT web, hosted agents)
 - Local history snapshots for trends beyond the API's retention
 - Playlist analytics and live-stream concurrency reports as dedicated tools
 

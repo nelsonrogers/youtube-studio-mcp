@@ -30,6 +30,8 @@ First release.
 - Opt-in write tools: update video details (dry-run diff), reply to comments, moderate comments.
 - Prompt templates: channel check-up, media-kit refresh, video deep dive, comment digest.
 - CLI: `serve`, `auth`, `status`, `check`, `media-kit`, `logout`.
+- Setup guides for Claude Desktop, Claude Code, ChatGPT desktop, Cursor and VS Code.
+- Fast startup (~1.5 s): the chart engine is loaded on the first chart request.
 
 [Unreleased]: https://github.com/nelsonrogers/youtube-studio-mcp/compare/v0.1.0...HEAD
 [0.1.0]: https://github.com/nelsonrogers/youtube-studio-mcp/releases/tag/v0.1.0
