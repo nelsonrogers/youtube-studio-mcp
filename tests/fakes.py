@@ -47,7 +47,8 @@ TITLES = [
 ]
 
 DIM_VALUES: dict[str, list[str]] = {
-    "creatorContentType": ["VIDEO_ON_DEMAND", "SHORTS", "LIVE_STREAM"],
+    # The real API returns camelCase values here (not the documented SHORTS/VIDEO_ON_DEMAND).
+    "creatorContentType": ["videoOnDemand", "shorts", "liveStream", "posts"],
     "ageGroup": ["age13-17", "age18-24", "age25-34", "age35-44", "age45-54", "age55-64", "age65-"],
     "gender": ["female", "male", "user_specified"],
     "country": ["US", "FR", "CA", "GB", "BE", "CH", "DE", "AU", "ES", "IT"],
@@ -70,7 +71,7 @@ DIM_VALUES: dict[str, list[str]] = {
     "sharingService": ["WHATS_APP", "COPY_PASTE", "INSTAGRAM"],
 }
 SHARES: dict[str, list[float]] = {
-    "creatorContentType": [0.41, 0.57, 0.02],
+    "creatorContentType": [0.40, 0.56, 0.02, 0.02],
     "ageGroup": [0.04, 0.22, 0.36, 0.20, 0.10, 0.05, 0.03],
     "gender": [0.68, 0.31, 0.01],
     "country": [0.38, 0.21, 0.09, 0.07, 0.05, 0.04, 0.03, 0.03, 0.02, 0.02],
@@ -101,6 +102,7 @@ PER_VIEW = {
     "adImpressions": 0.52,
 }
 AVERAGES = {"averageViewDuration": 144.0, "averageViewPercentage": 47.5, "cpm": 11.7, "playbackBasedCpm": 9.8}
+API_CONTENT_TYPE = {"SHORTS": "shorts", "VIDEO_ON_DEMAND": "videoOnDemand"}
 REVENUE = {
     "estimatedRevenue",
     "estimatedAdRevenue",
@@ -339,6 +341,12 @@ class FakeYouTubeAPI:
         }
 
     def _data_commentThreads_list(self, **params: Any) -> dict[str, Any]:
+        if "https://www.googleapis.com/auth/youtube.force-ssl" not in self.granted:
+            raise YouTubeAPIError(
+                "YouTube Data API error 403: Request had insufficient authentication scopes.",
+                status=403,
+                reasons=["insufficientPermissions"],
+            )
         assert ("videoId" in params) != ("allThreadsRelatedToChannelId" in params)
         assert params["maxResults"] <= 100
         items = []
@@ -440,6 +448,12 @@ class FakeYouTubeAPI:
             raise bad_request("province requires country==US")
         if "elapsedVideoTimeRatio" in dims and ("video" not in filters or "," in filters["video"]):
             raise bad_request("retention requires exactly one video filter")
+        if "video" in dims and "creatorContentType" in dims:
+            raise bad_request("The query is not supported.")  # verified against the live API
+        if "creatorContentType" in filters:
+            for value in filters["creatorContentType"].split(","):
+                if value not in DIM_VALUES["creatorContentType"]:
+                    raise bad_request(f"Invalid value ({value}) given in field parameters.filters.")
         if "subscribersGained" in metrics and "subscribedStatus" in dims:
             raise bad_request("The query is not supported.")
         if (
@@ -479,6 +493,9 @@ class FakeYouTubeAPI:
             if "video" in filters:
                 wanted = filters["video"].split(",")
                 pool = [v for v in pool if v["id"] in wanted]
+            if "creatorContentType" in filters:
+                kinds = filters["creatorContentType"].split(",")
+                pool = [v for v in pool if API_CONTENT_TYPE[v["kind"]] in kinds]
             weights = [1 / (i + 1) ** 0.9 for i in range(len(pool))]
             total = sum(weights) or 1
             return [(v["id"], w / total) for v, w in zip(pool, weights, strict=True)]
@@ -503,19 +520,15 @@ class FakeYouTubeAPI:
         scale = 0.08 if "video" in filters and "video" not in dims else 1.0
         if "country" in filters and "province" not in dims:
             scale *= 0.38
+        if "creatorContentType" in filters and "video" not in dims:
+            type_shares = dict(
+                zip(DIM_VALUES["creatorContentType"], SHARES["creatorContentType"], strict=True)
+            )
+            scale *= sum(type_shares[v] for v in filters["creatorContentType"].split(","))
         value_lists = [self._dimension_values(d, start, end, filters) for d in dims]
         rows = []
-        kinds = {v["id"]: v["kind"] for v in self.videos}
         for combo in product(*value_lists) if dims else [()]:
             labels = [value for value, _ in combo]
-            if "video" in dims and "creatorContentType" in dims:
-                # A real video has one content type: only emit that row, with its full share.
-                if kinds.get(labels[dims.index("video")]) != labels[dims.index("creatorContentType")]:
-                    continue
-                combo = tuple(
-                    (value, 1.0) if dims[i] == "creatorContentType" else (value, weight)
-                    for i, (value, weight) in enumerate(combo)
-                )
             share = math.prod(weight for _, weight in combo if weight >= 0) if combo else 1.0
             if "day" in dims:
                 period_days = [date.fromisoformat(labels[dims.index("day")])]
@@ -538,7 +551,9 @@ class FakeYouTubeAPI:
         if metric in PER_VIEW:
             factor = PER_VIEW[metric]
             if metric == "estimatedMinutesWatched" and content:
-                factor = {"SHORTS": 0.38, "VIDEO_ON_DEMAND": 5.1, "LIVE_STREAM": 9.0}.get(content, factor)
+                factor = {"shorts": 0.38, "videoOnDemand": 5.1, "liveStream": 9.0, "posts": 0.05}.get(
+                    content, factor
+                )
             value = views * factor
             return (
                 round(value, 3)
@@ -548,7 +563,9 @@ class FakeYouTubeAPI:
         if metric in AVERAGES:
             base = AVERAGES[metric]
             if metric == "averageViewDuration" and content:
-                base = {"SHORTS": 23.0, "VIDEO_ON_DEMAND": 306.0, "LIVE_STREAM": 540.0}.get(content, base)
+                base = {"shorts": 23.0, "videoOnDemand": 306.0, "liveStream": 540.0, "posts": 4.0}.get(
+                    content, base
+                )
             return round(base * (0.9 + 0.2 * _noise(metric, *labels)), 2)
         if metric == "viewerPercentage":
             return round(math.prod(w for _, w in combo) * 100, 2)

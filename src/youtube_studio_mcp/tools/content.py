@@ -6,8 +6,10 @@ from datetime import datetime
 from typing import Annotated, Any, Literal
 
 from mcp.server import MCPServer
+from mcp.server.mcpserver.exceptions import ToolError
 from pydantic import Field
 
+from youtube_studio_mcp.auth import AUTH_COMMAND, YOUTUBE_MANAGE
 from youtube_studio_mcp.context import READ_ONLY, AppContext, SaveToArg, tool_errors
 from youtube_studio_mcp.periods import parse_date
 from youtube_studio_mcp.youtube import (
@@ -250,7 +252,17 @@ def register(mcp: MCPServer, ctx: AppContext) -> None:
         save_to: SaveToArg = None,
     ) -> dict[str, Any]:
         """Read comment threads (top-level comments with reply counts) for the channel or one video,
-        e.g. to summarise audience sentiment, find questions, or spot content ideas."""
+        e.g. to summarise audience sentiment, find questions, or spot content ideas. Requires the
+        optional 'manage' permission (`youtube-studio-mcp auth --comments`): YouTube has no
+        read-only permission for comments."""
+        granted = ctx.api.granted_scopes()
+        if granted and YOUTUBE_MANAGE not in granted:
+            raise ToolError(
+                "Reading comments needs YouTube's 'manage' permission: Google has no read-only "
+                "permission for comments. If the user wants the comment tools, they can run "
+                f"`{AUTH_COMMAND} --comments` and approve it (editing tools still stay disabled "
+                "unless YOUTUBE_STUDIO_MCP_ENABLE_WRITE=1)."
+            )
         threads: list[dict[str, Any]] = []
         page_token: str | None = None
         channel_id = ctx.channel_id()

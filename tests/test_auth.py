@@ -150,6 +150,7 @@ def start_flow(
     monkeypatch.setattr(flow._flow, "fetch_token", fake_fetch_token)
     url = flow.start(open_browser=False)
     assert "access_type=offline" in url and "code_challenge=" in url  # refresh token + PKCE
+    assert "prompt=select_account+consent" in url  # always let people pick the channel
     assert flow.redirect_uri.startswith("http://127.0.0.1:")
     return flow
 

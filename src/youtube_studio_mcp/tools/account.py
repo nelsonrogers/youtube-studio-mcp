@@ -75,6 +75,7 @@ def register(mcp: MCPServer, ctx: AppContext) -> None:
                 },
                 "granted_permissions": [describe_scope(scope) for scope in granted],
                 "revenue_access": ANALYTICS_MONETARY_READONLY in granted,
+                "comments_access": YOUTUBE_MANAGE in granted,
                 "write_access": YOUTUBE_MANAGE in granted,
                 "missing_permissions": [describe_scope(s) for s in wanted if s not in granted],
             }
@@ -97,6 +98,15 @@ def register(mcp: MCPServer, ctx: AppContext) -> None:
                 description="Also request read access to revenue reports (only useful for monetized channels)."
             ),
         ] = True,
+        include_comments: Annotated[
+            bool,
+            Field(
+                description=(
+                    "Also request YouTube's 'manage' permission, which Google requires even to read "
+                    "comments. Only if the user wants the comment tools."
+                )
+            ),
+        ] = False,
     ) -> dict[str, Any]:
         """Start Google sign-in in the user's browser and return the sign-in URL immediately.
 
@@ -115,7 +125,7 @@ def register(mcp: MCPServer, ctx: AppContext) -> None:
 
         flow = LoopbackOAuthFlow(
             client_config,
-            requested_scopes(revenue=include_revenue, write=settings.enable_write),
+            requested_scopes(revenue=include_revenue, write=settings.enable_write or include_comments),
             on_success=on_success,
             timeout_seconds=SIGN_IN_TIMEOUT_SECONDS,
         )

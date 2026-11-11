@@ -22,6 +22,7 @@ Start Google sign-in in the user's browser and return the sign-in URL immediatel
 | Parameter | Type | Default | Description |
 |---|---|---|---|
 | `include_revenue` | boolean | `true` | Also request read access to revenue reports (only useful for monetized channels). |
+| `include_comments` | boolean | `false` | Also request YouTube's 'manage' permission, which Google requires even to read comments. Only if the user wants the comment tools. |
 
 ## Channel & content
 
@@ -72,7 +73,7 @@ The channel's playlists with item counts and privacy. Use list_videos(playlist_i
 
 *List comments* · read-only
 
-Read comment threads (top-level comments with reply counts) for the channel or one video, e.g. to summarise audience sentiment, find questions, or spot content ideas.
+Read comment threads (top-level comments with reply counts) for the channel or one video, e.g. to summarise audience sentiment, find questions, or spot content ideas. Requires the optional 'manage' permission (`youtube-studio-mcp auth --comments`): YouTube has no read-only permission for comments.
 
 | Parameter | Type | Default | Description |
 |---|---|---|---|

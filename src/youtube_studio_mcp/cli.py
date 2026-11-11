@@ -49,6 +49,8 @@ def cmd_serve(args: argparse.Namespace) -> int:
 
 
 def cmd_auth(args: argparse.Namespace) -> int:
+    # Flush every line: when output is piped (not a terminal), the sign-in URL must appear at once.
+    sys.stdout.reconfigure(line_buffering=True)  # type: ignore[union-attr]
     settings = _settings(args, enable_write=True if args.write else None)
     if args.client_secret:
         destination = install_client_secret(Path(args.client_secret).expanduser(), settings)
@@ -59,6 +61,7 @@ def cmd_auth(args: argparse.Namespace) -> int:
     flow = LoopbackOAuthFlow(client_config, scopes, on_success=store.save, timeout_seconds=args.timeout)
     url = flow.start(open_browser=not args.no_browser)
     print("Sign in with the Google account (or Brand Account) that owns the YouTube channel.")
+    print("If you manage several channels, Google asks which one: pick the channel you want here.")
     print("If your browser did not open, visit this URL:\n")
     print(f"  {url}\n")
     print("Waiting for you to finish in the browser (Ctrl+C to cancel)...")
@@ -226,7 +229,13 @@ def build_parser() -> argparse.ArgumentParser:
 
     auth = sub.add_parser("auth", parents=[profile], help="Sign in to YouTube in your browser.")
     auth.add_argument("--client-secret", metavar="PATH", help="Install a downloaded OAuth client JSON first.")
-    auth.add_argument("--write", action="store_true", help="Also grant permission to edit videos/comments.")
+    auth.add_argument(
+        "--comments",
+        "--write",
+        dest="write",
+        action="store_true",
+        help="Also grant YouTube's 'manage' permission: needed to read comments and for the editing tools.",
+    )
     auth.add_argument("--no-revenue", action="store_true", help="Don't request access to revenue reports.")
     auth.add_argument("--no-browser", action="store_true", help="Print the URL instead of opening a browser.")
     auth.add_argument("--timeout", type=int, default=300, help="Seconds to wait for sign-in (default 300).")

@@ -54,7 +54,11 @@ class NotAuthenticatedError(AuthError):
 
 
 def requested_scopes(*, revenue: bool = True, write: bool = False) -> list[str]:
-    """The OAuth scopes to request for the given feature set."""
+    """The OAuth scopes to request for the given feature set.
+
+    ``write`` adds YouTube's "manage" scope. Google offers no read-only scope for comments, so
+    it is also what reading comments requires.
+    """
     scopes = [YOUTUBE_READONLY, ANALYTICS_READONLY]
     if revenue:
         scopes.append(ANALYTICS_MONETARY_READONLY)
@@ -68,7 +72,7 @@ def describe_scope(scope: str) -> str:
         YOUTUBE_READONLY: "read channel, videos, playlists and comments",
         ANALYTICS_READONLY: "read YouTube Analytics reports",
         ANALYTICS_MONETARY_READONLY: "read revenue / ad-performance reports",
-        YOUTUBE_MANAGE: "edit video details and manage comments",
+        YOUTUBE_MANAGE: "read and manage comments, edit video details",
     }.get(scope, scope)
 
 
@@ -284,7 +288,9 @@ class LoopbackOAuthFlow:
         self._flow = Flow.from_client_config(client_config, scopes=scopes, redirect_uri=self.redirect_uri)
         auth_url, self._state = self._flow.authorization_url(
             access_type="offline",  # we need a refresh token
-            prompt="consent",  # Google only returns a refresh token on (re-)consent
+            # select_account: always show the account/channel chooser (people often have several);
+            # consent: Google only returns a refresh token on (re-)consent.
+            prompt="select_account consent",
         )
         self.auth_url: str = str(auth_url)
         self.status = "pending"  # pending | succeeded | failed | timed_out | cancelled

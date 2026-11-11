@@ -19,13 +19,13 @@ from youtube_studio_mcp.analytics import (
     aggregate_totals,
     label_for,
     pct_change,
-    run_report,
     run_report_with_optional_metrics,
 )
 from youtube_studio_mcp.context import READ_ONLY, AppContext, EndDateArg, PeriodArg, StartDateArg, tool_errors
 from youtube_studio_mcp.periods import DateRange, PeriodError, add_months
 from youtube_studio_mcp.tools.analytics import (
     breakdown,
+    classify_videos,
     performance_summary,
     timeseries,
     top_videos,
@@ -146,6 +146,7 @@ def daily_trend(rows: list[dict[str, Any]], date_range: DateRange) -> list[dict[
             "views_videos": 0,
             "views_shorts": 0,
             "views_live": 0,
+            "views_other": 0,  # posts, stories, unclassified
         }
         day += timedelta(days=1)
     column = {"VIDEO_ON_DEMAND": "views_videos", "SHORTS": "views_shorts", "LIVE_STREAM": "views_live"}
@@ -155,26 +156,8 @@ def daily_trend(rows: list[dict[str, Any]], date_range: DateRange) -> list[dict[
             continue
         views = int(row.get("views") or 0)
         entry["views"] += views
-        target = column.get(str(row.get("creatorContentType")))
-        if target:
-            entry[target] += views
+        entry[column.get(str(row.get("creatorContentType")), "views_other")] += views
     return list(per_day.values())
-
-
-def classify_videos(ctx: AppContext, date_range: DateRange, *, limit: int = 200) -> dict[str, str]:
-    """video_id -> creatorContentType for the videos with views in ``date_range`` (top ``limit``)."""
-    report = run_report(
-        ctx.api,
-        date_range,
-        ["views"],
-        dimensions=["video", "creatorContentType"],
-        sort="-views",
-        max_results=limit,
-    )
-    types: dict[str, str] = {}
-    for row in report.rows:  # sorted by views: keep each video's dominant content type
-        types.setdefault(str(row["video"]), str(row.get("creatorContentType")))
-    return types
 
 
 # --------------------------------------------------------------------------- uploads

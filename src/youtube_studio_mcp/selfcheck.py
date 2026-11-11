@@ -57,6 +57,7 @@ def _first_line(result: Any) -> str:
 async def run_checks(settings: Settings) -> int:
     server = build_server(settings)
     failures = 0
+    skipped = 0
     async with Client(server) as client:
         top_video: str | None = None
         checks = list(CHECKS)
@@ -68,6 +69,11 @@ async def run_checks(settings: Settings) -> int:
             result = await client.call_tool(name, arguments)
             elapsed = time.monotonic() - started
             label = f"{name}({', '.join(f'{k}={v}' for k, v in arguments.items())})"
+            full_text = " ".join(str(getattr(block, "text", "")) for block in result.content)
+            if result.is_error and "auth --comments" in full_text:
+                skipped += 1
+                print(f"skip  {label}  (needs `youtube-studio-mcp auth --comments`)")
+                continue
             if result.is_error:
                 failures += 1
                 print(f"FAIL  {label}  [{elapsed:.1f}s]\n      {_first_line(result)}")
@@ -84,7 +90,8 @@ async def run_checks(settings: Settings) -> int:
                     checks.append(("get_audience_retention", {"video_id": top_video}))
                     checks.append(("get_performance_summary", {"video_id": top_video, "period": "all_time"}))
                     checks.append(("get_videos_details", {"video_ids": [top_video]}))
-    print(f"\n{len(checks) - failures}/{len(checks)} checks passed.")
+    passed = len(checks) - failures - skipped
+    print(f"\n{passed}/{len(checks)} checks passed" + (f", {skipped} skipped." if skipped else "."))
     if failures:
         print("Some reports may be unavailable for small channels or short periods; see messages above.")
     return 1 if failures else 0

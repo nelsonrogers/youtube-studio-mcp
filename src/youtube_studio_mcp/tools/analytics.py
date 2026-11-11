@@ -18,6 +18,7 @@ from youtube_studio_mcp.analytics import (
     Report,
     add_shares,
     aggregate_daily_rows,
+    content_type_filter,
     join_filters,
     label_for,
     pct_change,
@@ -43,6 +44,7 @@ from youtube_studio_mcp.youtube import YouTubeAPIError, get_videos, parse_durati
 
 ContentType = Literal["shorts", "videos", "live"]
 CONTENT_TYPE_VALUES = {"shorts": "SHORTS", "videos": "VIDEO_ON_DEMAND", "live": "LIVE_STREAM"}
+CLASSIFIED_CONTENT_TYPES = ("VIDEO_ON_DEMAND", "SHORTS", "LIVE_STREAM")
 
 SUMMARY_METRICS = (
     "views",
@@ -273,6 +275,33 @@ def video_titles(ctx: AppContext, video_ids: list[str]) -> dict[str, dict[str, A
     }
 
 
+def classify_videos(ctx: AppContext, date_range: DateRange, *, limit: int = 200) -> dict[str, str]:
+    """video_id -> content type code for the top ``limit`` videos of each type in ``date_range``.
+
+    The API rejects ``video`` combined with the ``creatorContentType`` dimension, but accepts a
+    ``creatorContentType`` filter, so this runs one small ranking per content type.
+    """
+    types: dict[str, str] = {}
+    for code in CLASSIFIED_CONTENT_TYPES:
+        try:
+            report = run_report(
+                ctx.api,
+                date_range,
+                ["views"],
+                dimensions=["video"],
+                filters=content_type_filter(code),
+                sort="-views",
+                max_results=limit,
+            )
+        except YouTubeAPIError as exc:
+            if exc.status == 400:
+                continue  # e.g. a type this channel never used
+            raise
+        for row in report.rows:
+            types.setdefault(str(row["video"]), code)
+    return types
+
+
 def top_videos(
     ctx: AppContext,
     date_range: DateRange,
@@ -285,40 +314,37 @@ def top_videos(
     metrics = list(TOP_VIDEO_METRICS)
     if metric not in metrics:
         metrics.append(metric)
-    fetch = 200 if content_type else limit
-    try:
-        report = run_report_with_optional_metrics(
-            ctx.api,
-            date_range,
-            metrics,
-            ("engagedViews",),
-            dimensions=["video", "creatorContentType"],
-            sort=f"-{metric}",
-            max_results=fetch,
-        )
-    except YouTubeAPIError as exc:
-        if exc.status != 400 or content_type:
-            raise
-        report = run_report(
-            ctx.api, date_range, metrics, dimensions=["video"], sort=f"-{metric}", max_results=fetch
-        )
-    rows = report.rows
-    if content_type:
-        wanted = CONTENT_TYPE_VALUES[content_type]
-        rows = [row for row in rows if row.get("creatorContentType") == wanted]
-    rows = rows[:limit]
-    details = video_titles(ctx, [str(row["video"]) for row in rows]) if include_details else {}
+    wanted = CONTENT_TYPE_VALUES[content_type] if content_type else None
+    report = run_report_with_optional_metrics(
+        ctx.api,
+        date_range,
+        metrics,
+        ("engagedViews",),
+        dimensions=["video"],
+        filters=content_type_filter(wanted) if wanted else None,
+        sort=f"-{metric}",
+        max_results=limit,
+    )
+    rows = report.rows[:limit]
+    ids = [str(row["video"]) for row in rows]
+    details = video_titles(ctx, ids) if include_details else {}
+    if wanted:
+        kinds = dict.fromkeys(ids, wanted)
+    elif include_details and rows:
+        kinds = classify_videos(ctx, date_range)
+    else:
+        kinds = {}
     out = []
     for rank, row in enumerate(rows, start=1):
         video_id = str(row.pop("video"))
         info = details.get(video_id, {})
-        content = row.pop("creatorContentType", None)
+        kind = kinds.get(video_id)
         entry: dict[str, Any] = {
             "rank": rank,
             "video_id": video_id,
             "title": info.get("title"),
             "published_at": info.get("published_at"),
-            "content_type": label_for("creatorContentType", content) if content else None,
+            "content_type": label_for("creatorContentType", kind) if kind else None,
             "duration_seconds": info.get("duration_seconds"),
         }
         entry.update(derive(row))

@@ -123,8 +123,11 @@ async def test_daily_trend_covers_every_day(kit: dict[str, Any]) -> None:
     assert len(days) == 28
     assert days[0]["date"] == kit["period"]["start_date"] and days[-1]["date"] == kit["period"]["end_date"]
     for day in days:
-        assert set(day) == {"date", "views", "views_videos", "views_shorts", "views_live"}
-        assert day["views"] == day["views_videos"] + day["views_shorts"] + day["views_live"]
+        assert set(day) == {"date", "views", "views_videos", "views_shorts", "views_live", "views_other"}
+        assert (
+            day["views"] == day["views_videos"] + day["views_shorts"] + day["views_live"] + day["views_other"]
+        )
+        assert day["views_other"] > 0  # the fake, like real channels, has views on posts
 
 
 async def test_audience_blocks(kit: dict[str, Any]) -> None:
@@ -147,7 +150,13 @@ async def test_audience_blocks(kit: dict[str, Any]) -> None:
         "share_pct": countries[0]["share_pct"],
     }
     assert {d["code"] for d in audience["devices"]} >= {"MOBILE", "TV"}
-    assert {c["code"] for c in audience["content_type"]} == {"SHORTS", "VIDEO_ON_DEMAND", "LIVE_STREAM"}
+    # Real API values are camelCase (shorts, videoOnDemand, posts); the contract uses uppercase codes.
+    assert {c["code"] for c in audience["content_type"]} == {
+        "SHORTS",
+        "VIDEO_ON_DEMAND",
+        "LIVE_STREAM",
+        "POSTS",
+    }
 
 
 async def test_uploads_top_videos_and_traffic(kit: dict[str, Any]) -> None:

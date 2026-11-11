@@ -6,6 +6,25 @@ All notable changes to this project are documented here. The format follows
 
 ## [Unreleased]
 
+### Fixed
+
+- Shorts/videos splits returned no data on real channels: the YouTube Analytics API returns (and only
+  accepts in filters) camelCase content types like `shorts` and `videoOnDemand`, not the documented
+  `SHORTS`/`VIDEO_ON_DEMAND`. Values are now normalised to the documented codes, and filters are translated.
+- `get_top_videos` filtered by content type failed (`video` can't be combined with the
+  `creatorContentType` dimension); rankings now use a content-type filter instead.
+- `list_comments` now explains that Google requires the "manage" permission to read comments, instead
+  of a raw 403. New `auth --comments` flag (alias of `--write`) and `authenticate(include_comments=...)`.
+- `auth` prints the sign-in URL immediately when its output is piped, and always shows Google's
+  account/channel chooser.
+
+### Added
+
+- `daily_trend.views_other` in the media-kit snapshot (posts, stories, unclassified), the `POSTS` content
+  type and the `SHORTS_CONTENT_LINKS` traffic source.
+- Setup guide: Branding fields, leaving Data access empty, the "AI-powered agent" checkbox, picking
+  the right channel.
+
 ## [0.1.0] - 2026-11-11
 
 First release.

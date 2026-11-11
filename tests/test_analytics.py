@@ -7,6 +7,8 @@ from youtube_studio_mcp.analytics import (
     add_shares,
     aggregate_daily_rows,
     aggregate_totals,
+    content_type_code,
+    content_type_filter,
     join_filters,
     label_for,
     pct_change,
@@ -97,6 +99,32 @@ def test_run_report_rejects_bad_names() -> None:
         run_report(FakeYouTubeAPI(), RANGE, ["views;drop"])
     with pytest.raises(ValueError, match="At least one metric"):
         run_report(FakeYouTubeAPI(), RANGE, [])
+
+
+def test_content_type_codes_are_normalised_both_ways() -> None:
+    # The live API returns and only accepts camelCase values ("shorts", "videoOnDemand"), unlike its docs.
+    assert content_type_code("videoOnDemand") == "VIDEO_ON_DEMAND"
+    assert content_type_code("shorts") == "SHORTS"
+    assert content_type_code("creatorContentTypeUnspecified") == "UNSPECIFIED"
+    assert content_type_code("someNewType") == "SOME_NEW_TYPE"
+    assert content_type_code("SHORTS") == "SHORTS"
+    assert content_type_filter("VIDEO_ON_DEMAND") == "creatorContentType==videoOnDemand"
+    api = FakeYouTubeAPI()
+    report = run_report(api, RANGE, ["views"], dimensions=["creatorContentType"])
+    assert {row["creatorContentType"] for row in report.rows} == {
+        "VIDEO_ON_DEMAND",
+        "SHORTS",
+        "LIVE_STREAM",
+        "POSTS",
+    }
+    run_report(
+        api,
+        RANGE,
+        ["views"],
+        dimensions=["day"],
+        filters="creatorContentType==SHORTS,VIDEO_ON_DEMAND;country==FR",
+    )
+    assert api.calls[-1][1]["filters"] == "creatorContentType==shorts,videoOnDemand;country==FR"
 
 
 def test_optional_metrics_fall_back_on_400() -> None:

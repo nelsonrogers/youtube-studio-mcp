@@ -92,6 +92,7 @@ TRAFFIC_SOURCE_LABELS = {
     "PROMOTED": "Promoted (unpaid)",
     "RELATED_VIDEO": "Suggested videos",
     "SHORTS": "Shorts feed",
+    "SHORTS_CONTENT_LINKS": "Links in Shorts",
     "SOUND_PAGE": "Sound pages",
     "SUBSCRIBER": "Browse features (home, subscriptions)",
     "YT_CHANNEL": "Channel pages",
@@ -108,6 +109,7 @@ VALUE_LABELS: dict[str, dict[str, str]] = {
         "VIDEO_ON_DEMAND": "Videos",
         "LIVE_STREAM": "Live",
         "STORY": "Stories",
+        "POSTS": "Posts",
         "UNSPECIFIED": "Unspecified",
     },
     "deviceType": {
@@ -144,6 +146,48 @@ VALUE_LABELS: dict[str, dict[str, str]] = {
         "age65-": "65+",
     },
 }
+
+
+# The API documents creatorContentType values as SHORTS, VIDEO_ON_DEMAND, ... but actually returns
+# (and only accepts in filters) camelCase values such as "shorts" and "videoOnDemand". Everything
+# in this package uses the documented uppercase codes; run_report translates at the boundary.
+CONTENT_TYPE_API_VALUES = {
+    "SHORTS": "shorts",
+    "VIDEO_ON_DEMAND": "videoOnDemand",
+    "LIVE_STREAM": "liveStream",
+    "STORY": "story",
+    "POSTS": "posts",
+    "UNSPECIFIED": "creatorContentTypeUnspecified",
+}
+_CONTENT_TYPE_CODES = {
+    **{api.lower(): code for code, api in CONTENT_TYPE_API_VALUES.items()},
+    **{code.lower(): code for code in CONTENT_TYPE_API_VALUES},
+}
+_CAMEL_BOUNDARY = re.compile(r"(?<=[a-z0-9])(?=[A-Z])")
+_CONTENT_TYPE_FILTER = re.compile(r"(creatorContentType==)([^;]+)")
+
+
+def content_type_code(value: Any) -> str:
+    """Canonical uppercase code for a creatorContentType value in either spelling."""
+    text = str(value)
+    known = _CONTENT_TYPE_CODES.get(text.lower())
+    return known or _CAMEL_BOUNDARY.sub("_", text).upper()
+
+
+def content_type_filter(code: str) -> str:
+    """Analytics filter selecting one content type, e.g. ``content_type_filter("SHORTS")``."""
+    return f"creatorContentType=={CONTENT_TYPE_API_VALUES.get(code, code)}"
+
+
+def _translate_filters(filters: str) -> str:
+    def repl(match: re.Match[str]) -> str:
+        values = [
+            CONTENT_TYPE_API_VALUES.get(content_type_code(v.strip()), v.strip())
+            for v in match.group(2).split(",")
+        ]
+        return match.group(1) + ",".join(values)
+
+    return _CONTENT_TYPE_FILTER.sub(repl, filters)
 
 
 def label_for(dimension: str, value: Any) -> str | None:
@@ -206,7 +250,7 @@ def run_report(
     if dimension_names:
         params["dimensions"] = ",".join(dimension_names)
     if filters:
-        params["filters"] = filters
+        params["filters"] = _translate_filters(filters)
     if sort:
         params["sort"] = sort
     if max_results is not None:
@@ -219,6 +263,9 @@ def run_report(
     response = api.analytics(**params)
     columns = [str(header.get("name")) for header in response.get("columnHeaders") or []]
     rows = [dict(zip(columns, row, strict=False)) for row in response.get("rows") or []]
+    if "creatorContentType" in columns:
+        for row in rows:
+            row["creatorContentType"] = content_type_code(row["creatorContentType"])
     return Report(columns=columns, rows=rows, date_range=date_range, query=params)
 
 

@@ -54,7 +54,7 @@
     "female_pct": 68.0,
     "male_pct": 31.0,
     "mobile_share_pct": 71.0,
-    "shorts_view_share_pct": 57.0,
+    "shorts_view_share_pct": 56.0,
     "subscriber_growth_pct": 61.3,
     "subscriber_growth_window": "2025-12..2026-10"
   },
@@ -123,34 +123,34 @@
   "performance_by_content_type": {
     "videos": {
       "views": {
-        "value": 51256,
-        "previous": 50420,
+        "value": 50001,
+        "previous": 49187,
         "change_pct": 1.7
       },
       "engaged_views": {
-        "value": 43053,
-        "previous": 42352,
+        "value": 42003,
+        "previous": 41320,
         "change_pct": 1.7
       },
       "likes": {
-        "value": 2458,
-        "previous": 2422,
-        "change_pct": 1.5
+        "value": 2401,
+        "previous": 2364,
+        "change_pct": 1.6
       },
       "net_subscribers": {
-        "value": 695,
-        "previous": 680,
-        "change_pct": 2.2
+        "value": 678,
+        "previous": 662,
+        "change_pct": 2.4
       },
       "watch_time_hours": {
-        "value": 4356.6,
-        "previous": 4285.6,
+        "value": 4250.4,
+        "previous": 4181.0,
         "change_pct": 1.7
       },
       "average_view_duration_s": {
-        "value": 302.7898,
-        "previous": 305.0994,
-        "change_pct": -0.8
+        "value": 306.6861,
+        "previous": 302.3125,
+        "change_pct": 1.4
       },
       "impressions": {
         "value": 254303,
@@ -165,34 +165,34 @@
     },
     "shorts": {
       "views": {
-        "value": 71256,
-        "previous": 70095,
+        "value": 70006,
+        "previous": 68864,
         "change_pct": 1.7
       },
       "engaged_views": {
-        "value": 59852,
-        "previous": 58878,
+        "value": 58806,
+        "previous": 57842,
         "change_pct": 1.7
       },
       "likes": {
-        "value": 3419,
-        "previous": 3365,
-        "change_pct": 1.6
+        "value": 3363,
+        "previous": 3306,
+        "change_pct": 1.7
       },
       "net_subscribers": {
-        "value": 966,
-        "previous": 946,
-        "change_pct": 2.1
+        "value": 947,
+        "previous": 931,
+        "change_pct": 1.7
       },
       "watch_time_hours": {
-        "value": 451.3,
-        "previous": 443.9,
+        "value": 443.4,
+        "previous": 436.1,
         "change_pct": 1.7
       },
       "average_view_duration_s": {
-        "value": 23.0585,
-        "previous": 23.3437,
-        "change_pct": -1.2
+        "value": 23.0791,
+        "previous": 23.1957,
+        "change_pct": -0.5
       },
       "impressions": {
         "value": 302261,
@@ -217,198 +217,226 @@
     {
       "date": "2026-10-12",
       "views": 4641,
-      "views_videos": 1903,
-      "views_shorts": 2645,
-      "views_live": 93
+      "views_videos": 1856,
+      "views_shorts": 2599,
+      "views_live": 93,
+      "views_other": 93
     },
     {
       "date": "2026-10-13",
       "views": 5367,
-      "views_videos": 2201,
-      "views_shorts": 3059,
-      "views_live": 107
+      "views_videos": 2147,
+      "views_shorts": 3006,
+      "views_live": 107,
+      "views_other": 107
     },
     {
       "date": "2026-10-14",
       "views": 4899,
-      "views_videos": 2009,
-      "views_shorts": 2792,
-      "views_live": 98
+      "views_videos": 1960,
+      "views_shorts": 2743,
+      "views_live": 98,
+      "views_other": 98
     },
     {
       "date": "2026-10-15",
       "views": 3798,
-      "views_videos": 1557,
-      "views_shorts": 2165,
-      "views_live": 76
+      "views_videos": 1519,
+      "views_shorts": 2127,
+      "views_live": 76,
+      "views_other": 76
     },
     {
       "date": "2026-10-16",
       "views": 3355,
-      "views_videos": 1376,
-      "views_shorts": 1912,
-      "views_live": 67
+      "views_videos": 1342,
+      "views_shorts": 1879,
+      "views_live": 67,
+      "views_other": 67
     },
     {
       "date": "2026-10-17",
       "views": 3940,
-      "views_videos": 1615,
-      "views_shorts": 2246,
-      "views_live": 79
+      "views_videos": 1576,
+      "views_shorts": 2206,
+      "views_live": 79,
+      "views_other": 79
     },
     {
       "date": "2026-10-18",
       "views": 4791,
-      "views_videos": 1964,
-      "views_shorts": 2731,
-      "views_live": 96
+      "views_videos": 1916,
+      "views_shorts": 2683,
+      "views_live": 96,
+      "views_other": 96
     },
     {
       "date": "2026-10-19",
       "views": 4327,
-      "views_videos": 1774,
-      "views_shorts": 2466,
-      "views_live": 87
+      "views_videos": 1730,
+      "views_shorts": 2423,
+      "views_live": 87,
+      "views_other": 87
     },
     {
       "date": "2026-10-20",
       "views": 4900,
-      "views_videos": 2009,
-      "views_shorts": 2793,
-      "views_live": 98
+      "views_videos": 1960,
+      "views_shorts": 2744,
+      "views_live": 98,
+      "views_other": 98
     },
     {
       "date": "2026-10-21",
       "views": 4505,
-      "views_videos": 1847,
-      "views_shorts": 2568,
-      "views_live": 90
+      "views_videos": 1802,
+      "views_shorts": 2523,
+      "views_live": 90,
+      "views_other": 90
     },
     {
       "date": "2026-10-22",
-      "views": 4221,
-      "views_videos": 1731,
-      "views_shorts": 2406,
-      "views_live": 84
+      "views": 4220,
+      "views_videos": 1688,
+      "views_shorts": 2364,
+      "views_live": 84,
+      "views_other": 84
     },
     {
       "date": "2026-10-23",
       "views": 3930,
-      "views_videos": 1611,
-      "views_shorts": 2240,
-      "views_live": 79
+      "views_videos": 1572,
+      "views_shorts": 2200,
+      "views_live": 79,
+      "views_other": 79
     },
     {
       "date": "2026-10-24",
       "views": 3833,
-      "views_videos": 1571,
-      "views_shorts": 2185,
-      "views_live": 77
+      "views_videos": 1533,
+      "views_shorts": 2146,
+      "views_live": 77,
+      "views_other": 77
     },
     {
       "date": "2026-10-25",
       "views": 3880,
-      "views_videos": 1591,
-      "views_shorts": 2211,
-      "views_live": 78
+      "views_videos": 1552,
+      "views_shorts": 2172,
+      "views_live": 78,
+      "views_other": 78
     },
     {
       "date": "2026-10-26",
       "views": 4597,
-      "views_videos": 1885,
-      "views_shorts": 2620,
-      "views_live": 92
+      "views_videos": 1839,
+      "views_shorts": 2574,
+      "views_live": 92,
+      "views_other": 92
     },
     {
       "date": "2026-10-27",
       "views": 5448,
-      "views_videos": 2234,
-      "views_shorts": 3105,
-      "views_live": 109
+      "views_videos": 2179,
+      "views_shorts": 3051,
+      "views_live": 109,
+      "views_other": 109
     },
     {
       "date": "2026-10-28",
       "views": 5527,
-      "views_videos": 2266,
-      "views_shorts": 3150,
-      "views_live": 111
+      "views_videos": 2210,
+      "views_shorts": 3095,
+      "views_live": 111,
+      "views_other": 111
     },
     {
       "date": "2026-10-29",
-      "views": 4635,
-      "views_videos": 1900,
-      "views_shorts": 2642,
-      "views_live": 93
+      "views": 4636,
+      "views_videos": 1854,
+      "views_shorts": 2596,
+      "views_live": 93,
+      "views_other": 93
     },
     {
       "date": "2026-10-30",
       "views": 3412,
-      "views_videos": 1399,
-      "views_shorts": 1945,
-      "views_live": 68
+      "views_videos": 1365,
+      "views_shorts": 1911,
+      "views_live": 68,
+      "views_other": 68
     },
     {
       "date": "2026-10-31",
       "views": 4355,
-      "views_videos": 1786,
-      "views_shorts": 2482,
-      "views_live": 87
+      "views_videos": 1742,
+      "views_shorts": 2439,
+      "views_live": 87,
+      "views_other": 87
     },
     {
       "date": "2026-11-01",
       "views": 3929,
-      "views_videos": 1611,
-      "views_shorts": 2239,
-      "views_live": 79
+      "views_videos": 1571,
+      "views_shorts": 2200,
+      "views_live": 79,
+      "views_other": 79
     },
     {
       "date": "2026-11-02",
-      "views": 5637,
-      "views_videos": 2311,
-      "views_shorts": 3213,
-      "views_live": 113
+      "views": 5636,
+      "views_videos": 2254,
+      "views_shorts": 3156,
+      "views_live": 113,
+      "views_other": 113
     },
     {
       "date": "2026-11-03",
       "views": 5622,
-      "views_videos": 2305,
-      "views_shorts": 3205,
-      "views_live": 112
+      "views_videos": 2249,
+      "views_shorts": 3149,
+      "views_live": 112,
+      "views_other": 112
     },
     {
       "date": "2026-11-04",
-      "views": 4420,
-      "views_videos": 1812,
-      "views_shorts": 2520,
-      "views_live": 88
+      "views": 4419,
+      "views_videos": 1768,
+      "views_shorts": 2475,
+      "views_live": 88,
+      "views_other": 88
     },
     {
       "date": "2026-11-05",
       "views": 4841,
-      "views_videos": 1985,
-      "views_shorts": 2759,
-      "views_live": 97
+      "views_videos": 1936,
+      "views_shorts": 2711,
+      "views_live": 97,
+      "views_other": 97
     },
     {
       "date": "2026-11-06",
       "views": 3633,
-      "views_videos": 1489,
-      "views_shorts": 2071,
-      "views_live": 73
+      "views_videos": 1453,
+      "views_shorts": 2034,
+      "views_live": 73,
+      "views_other": 73
     },
     {
       "date": "2026-11-07",
-      "views": 4413,
-      "views_videos": 1809,
-      "views_shorts": 2516,
-      "views_live": 88
+      "views": 4412,
+      "views_videos": 1765,
+      "views_shorts": 2471,
+      "views_live": 88,
+      "views_other": 88
     },
     {
       "date": "2026-11-08",
       "views": 4158,
-      "views_videos": 1705,
-      "views_shorts": 2370,
-      "views_live": 83
+      "views_videos": 1663,
+      "views_shorts": 2329,
+      "views_live": 83,
+      "views_other": 83
     }
   ],
   "monthly_trend": [
@@ -674,18 +702,24 @@
       {
         "code": "SHORTS",
         "label": "Shorts",
-        "views": 71256,
-        "share_pct": 57.0
+        "views": 70006,
+        "share_pct": 56.0
       },
       {
         "code": "VIDEO_ON_DEMAND",
         "label": "Videos",
-        "views": 51254,
-        "share_pct": 41.0
+        "views": 50004,
+        "share_pct": 40.0
       },
       {
         "code": "LIVE_STREAM",
         "label": "Live",
+        "views": 2500,
+        "share_pct": 2.0
+      },
+      {
+        "code": "POSTS",
+        "label": "Posts",
         "views": 2500,
         "share_pct": 2.0
       }
@@ -864,8 +898,8 @@
       "published_at": "2026-11-05T16:00:00Z",
       "content_type": "Shorts",
       "views": 22256,
-      "watch_time_hours": 140.9,
-      "average_view_duration_s": 24.47,
+      "watch_time_hours": 890.2,
+      "average_view_duration_s": 146.57,
       "likes": 1068,
       "comments": 91,
       "engagement_rate_pct": 5.53
@@ -879,8 +913,8 @@
       "published_at": "2026-11-01T16:00:00Z",
       "content_type": "Videos",
       "views": 11927,
-      "watch_time_hours": 1013.8,
-      "average_view_duration_s": 321.11,
+      "watch_time_hours": 477.1,
+      "average_view_duration_s": 141.61,
       "likes": 572,
       "comments": 49,
       "engagement_rate_pct": 5.53
@@ -894,8 +928,8 @@
       "published_at": "2026-10-28T16:00:00Z",
       "content_type": "Shorts",
       "views": 8280,
-      "watch_time_hours": 52.4,
-      "average_view_duration_s": 22.51,
+      "watch_time_hours": 331.2,
+      "average_view_duration_s": 132.26,
       "likes": 397,
       "comments": 34,
       "engagement_rate_pct": 5.52
@@ -909,8 +943,8 @@
       "published_at": "2026-10-24T16:00:00Z",
       "content_type": "Videos",
       "views": 6391,
-      "watch_time_hours": 543.3,
-      "average_view_duration_s": 326.66,
+      "watch_time_hours": 255.7,
+      "average_view_duration_s": 135.76,
       "likes": 307,
       "comments": 26,
       "engagement_rate_pct": 5.52
@@ -924,8 +958,8 @@
       "published_at": "2026-10-20T16:00:00Z",
       "content_type": "Shorts",
       "views": 5228,
-      "watch_time_hours": 33.1,
-      "average_view_duration_s": 21.3,
+      "watch_time_hours": 209.1,
+      "average_view_duration_s": 158.29,
       "likes": 251,
       "comments": 21,
       "engagement_rate_pct": 5.53

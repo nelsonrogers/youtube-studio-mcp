@@ -112,12 +112,26 @@ def settings_out(tmp_path: Path) -> Path:
     return (tmp_path / "out").resolve()
 
 
-async def test_playlists_and_comments(client: Client) -> None:
-    playlists = await call(client, "list_playlists")
-    assert playlists["count"] == 3
-    comments = await call(client, "list_comments", limit=5, include_replies=True)
-    assert comments["count"] == 5
-    assert comments["comments"][0]["replies"][0]["author_is_channel_owner"] is True
+MANAGE = "https://www.googleapis.com/auth/youtube.force-ssl"
+
+
+async def test_playlists_and_comments(make_client: Callable[..., Client]) -> None:
+    api = FakeYouTubeAPI(granted=[YOUTUBE_READONLY, ANALYTICS_READONLY, MANAGE])
+    async with make_client(api) as client:
+        playlists = await call(client, "list_playlists")
+        assert playlists["count"] == 3
+        comments = await call(client, "list_comments", limit=5, include_replies=True)
+        assert comments["count"] == 5
+        assert comments["comments"][0]["replies"][0]["author_is_channel_owner"] is True
+        status = await call(client, "get_auth_status")
+        assert status["comments_access"] is True
+
+
+async def test_comments_explain_the_manage_permission(client: Client) -> None:
+    # Verified against the live API: commentThreads.list rejects read-only tokens.
+    message = await call_error(client, "list_comments", limit=5)
+    assert "no read-only permission" in message and "auth --comments" in message
+    assert (await call(client, "get_auth_status"))["comments_access"] is False
 
 
 async def test_performance_summary(client: Client, fake_api: FakeYouTubeAPI) -> None:

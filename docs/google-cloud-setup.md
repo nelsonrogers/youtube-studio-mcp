@@ -27,14 +27,21 @@ Go to **APIs & Services → OAuth consent screen** (shown as **Google Auth Platf
 console) and click **Get started**:
 
 1. **App information:** any name (e.g. `YouTube Studio MCP`) and your email as the support email.
-2. **Audience:** choose **External** (or **Internal** if the channel belongs to a Google Workspace
-   organisation you administer).
+2. **Audience:** choose **External**. (*Internal* only admits accounts of the Google Workspace
+   organisation that owns the project, which YouTube channel accounts usually aren't.)
 3. **Contact information:** your email. Accept the policy and click **Create**.
-4. *(Recommended)* **Data access → Add or remove scopes**, then add:
-   - `.../auth/youtube.readonly`
-   - `.../auth/yt-analytics.readonly`
-   - `.../auth/yt-analytics-monetary.readonly` (only needed for revenue)
-   - `.../auth/youtube.force-ssl` (only if you will enable the optional write tools)
+4. **Leave "Data access" empty.** The app asks for its permissions at sign-in. Listing YouTube
+   scopes here makes the console push you towards Google's verification process, which you don't need.
+
+The **Branding** page is only what appears on Google's sign-in screen; nobody else sees it. Fill the
+required fields only:
+
+- App name, user support email and developer contact email: required.
+- **App logo: leave empty.** Uploading a logo triggers Google's brand review.
+- App domain links: only if the console insists. Use the project page
+  (`https://github.com/nelsonrogers/youtube-studio-mcp`) as home page and
+  `https://github.com/nelsonrogers/youtube-studio-mcp#privacy--security` as privacy policy, and add
+  `github.com` under authorized domains.
 
 ### Avoid weekly sign-ins
 
@@ -42,9 +49,10 @@ While an External app is in **Testing**, Google expires its sign-ins after **7 d
 have to run `youtube-studio-mcp auth` every week. To avoid that:
 
 1. Open **Audience** and click **Publish app** so the status becomes **In production**.
-2. You do **not** need to submit the app for verification for personal use. Unverified apps can be
-   used by up to 100 Google accounts. Each person sees a "Google hasn't verified this app" warning
-   when signing in (see step 5).
+2. You do **not** need to submit the app for verification for personal use. If the console says your
+   app "requires verification", confirm publishing anyway: unverified apps work for up to 100 Google
+   accounts. Each person sees a "Google hasn't verified this app" warning when signing in (see
+   step 5). If it refuses to publish, remove any scopes you added under **Data access** and retry.
 
 If you prefer to stay in Testing, add the channel owner's Google account under
 **Audience → Test users** and expect to sign in again weekly.
@@ -53,7 +61,9 @@ If you prefer to stay in Testing, add the channel owner's Google account under
 
 1. Go to **APIs & Services → Credentials** (or **Google Auth Platform → Clients**).
 2. **Create credentials → OAuth client ID**.
-3. Application type: **Desktop app**. Name: anything. Click **Create**.
+3. Application type: **Desktop app**. Name: anything. Leave **"Use this client for an AI-powered
+   agent"** unticked: that option is for clients of Google's own MCP servers, and this server calls
+   the regular YouTube APIs. Click **Create**.
 4. Click **Download JSON**. You get a file like `client_secret_1234-abc.apps.googleusercontent.com.json`.
 
 Keep this file private. It identifies *your* app (it can't access any data on its own).
@@ -67,8 +77,9 @@ youtube-studio-mcp auth --client-secret ~/Downloads/client_secret_XXXX.json
 The command copies the client file into the config folder (`~/.config/youtube-studio-mcp/` or
 `%APPDATA%\youtube-studio-mcp\`) and opens your browser:
 
-1. Choose the Google account that owns the channel. **If the channel is a Brand Account**, Google
-   shows a second screen listing your channels: pick the channel.
+1. Choose the Google account that owns the channel. **If you have several channels** (Brand
+   Accounts), Google shows a second screen listing them: pick the right one. The terminal prints the
+   channel it connected to; if it's the wrong one, run `youtube-studio-mcp logout` and sign in again.
 2. "Google hasn't verified this app": click **Advanced → Go to YouTube Studio MCP (unsafe)**. It's
    your own app; the warning only appears because it hasn't been through Google's review.
 3. Tick **all** the permission checkboxes and click **Continue**.
@@ -83,6 +94,9 @@ The terminal then prints `Signed in. Channel: …`. Next, add the server to your
   as the channel itself.
 - **Several channels:** use profiles, e.g. `youtube-studio-mcp auth --profile gaming`, then set
   `YOUTUBE_STUDIO_MCP_PROFILE=gaming` for that server entry.
+- **Comments:** Google has no read-only permission for comments; reading them needs YouTube's
+  "manage" permission. Grant it only if you want the comment tools: `youtube-studio-mcp auth --comments`.
+  (Editing tools stay hidden unless `YOUTUBE_STUDIO_MCP_ENABLE_WRITE=1`.)
 - **Revoking access:** `youtube-studio-mcp logout`, or remove the app at
   <https://myaccount.google.com/permissions>.
 - **Quota:** the default YouTube Data API quota is 10,000 units/day; this server uses about 1 unit

@@ -30,7 +30,7 @@ Google to your machine to your AI app, and nowhere else. It's read-only unless y
 | **Audience** | `get_audience_breakdown`: age, gender, age×gender, countries, US states, devices, OS, subscribers vs not, Shorts vs long-form, playback locations, sharing services |
 | **Discovery** | `get_traffic_sources`: search, suggested, browse, Shorts feed, external…, plus the **search terms**, referring videos and websites |
 | **Retention** | `get_audience_retention`: the retention curve with timestamps, key milestones and the steepest drop-offs |
-| **Comments** | `list_comments`: recent comments channel-wide or per video, including the held-for-review queue |
+| **Comments** | `list_comments`: recent comments channel-wide or per video, including the held-for-review queue (needs `auth --comments`: YouTube has no read-only comment permission) |
 | **Money** | `get_revenue`: estimated revenue, RPM, CPM, monetized playbacks, top-earning videos (YPP channels) |
 | **Impressions & CTR** *(beta)* | `enable_impressions_reports`, `get_impressions`: thumbnail impressions and click-through rate, by day or video |
 | **Media kit** | `get_media_kit_data`: one call returns a stable, documented JSON snapshot ([schema](docs/media-kit-data.md)) |
@@ -188,7 +188,7 @@ All settings are environment variables, so you can set them in your MCP client's
 
 ```text
 youtube-studio-mcp [serve]          run the MCP server over stdio (what MCP clients launch)
-youtube-studio-mcp auth             sign in (--client-secret PATH, --write, --no-revenue, --no-browser)
+youtube-studio-mcp auth             sign in (--client-secret PATH, --comments, --no-revenue, --no-browser)
 youtube-studio-mcp status           show sign-in state and configuration
 youtube-studio-mcp check            call every read-only tool against your channel
 youtube-studio-mcp media-kit        write the media-kit JSON (--out, --period, --start-date, --end-date)
@@ -209,7 +209,7 @@ Off by default. To let your agent edit titles/descriptions/tags/visibility, repl
 moderate them:
 
 ```bash
-youtube-studio-mcp auth --write
+youtube-studio-mcp auth --comments   # same permission as --write
 ```
 
 …and set `"env": {"YOUTUBE_STUDIO_MCP_ENABLE_WRITE": "1"}`. `update_video_details` defaults to a
@@ -229,6 +229,8 @@ dry run that shows a before/after diff. Agents are told to confirm with you befo
 - **Impressions & CTR** aren't in the Analytics API. They come from the YouTube Reporting API
   (daily files, ~2-day delay, history starts 30 days before reports were enabled).
 - **Quota:** listing uses ~1 unit per 50 videos out of a default 10,000/day; no `search.list` calls.
+- **Comments** need YouTube's "manage" permission even to read them (Google offers no read-only
+  option), so they're opt-in: `youtube-studio-mcp auth --comments`.
 - **Owner only:** the APIs return analytics only for channels the signed-in account owns
   (Studio "manager" access isn't enough).
 
