@@ -1,0 +1,36 @@
+name: Bug report
+description: Something doesn't work as documented
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting! Please **never paste tokens, client secrets or private channel data**.
+        Running `youtube-studio-mcp check` and pasting the failing lines is very helpful.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: Include the tool name, the arguments and the error message the agent received.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect?
+  - type: textarea
+    id: check
+    attributes:
+      label: Output of `youtube-studio-mcp check` (failing lines only)
+      render: text
+  - type: input
+    id: version
+    attributes:
+      label: Version (`youtube-studio-mcp --version`)
+    validations:
+      required: true
+  - type: input
+    id: client
+    attributes:
+      label: MCP client and OS
+      placeholder: Claude Desktop 1.x on macOS 26

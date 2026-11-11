@@ -1,0 +1,994 @@
+{
+  "schema_version": "1",
+  "generated_at": "2026-11-11T09:00:00+00:00",
+  "data_through": "2026-11-08",
+  "period": {
+    "start_date": "2026-10-12",
+    "end_date": "2026-11-08",
+    "days": 28,
+    "label": "last_28_days"
+  },
+  "comparison_period": {
+    "start_date": "2026-09-14",
+    "end_date": "2026-10-11",
+    "days": 28,
+    "label": "previous 28 days"
+  },
+  "channel": {
+    "id": "UCfakeChannel000000000001",
+    "title": "Maple & Thread",
+    "handle": "@mapleandthread",
+    "url": "https://www.youtube.com/@mapleandthread",
+    "description": "Slow crafting, honest tutorials and studio vlogs.",
+    "created_at": "2019-03-02T10:00:00Z",
+    "country": "FR",
+    "thumbnail_url": "https://yt3.ggpht.com/fake-avatar=s800",
+    "subscribers": 48400,
+    "subscribers_is_rounded": true,
+    "subscribers_from_analytics": 48383,
+    "total_views": 9120345,
+    "video_count": 412
+  },
+  "highlights": {
+    "subscribers": 48400,
+    "subscribers_from_analytics": 48383,
+    "total_views": 9120345,
+    "video_count": 412,
+    "period_views": 125010,
+    "period_watch_time_hours": 5000.4,
+    "period_net_subscribers": 1688,
+    "engagement_rate_pct": 5.53,
+    "average_view_duration_s": 131.54,
+    "avg_views_per_video_recent": 33455,
+    "avg_views_per_short_recent": 26453,
+    "top_country": {
+      "code": "US",
+      "views": 47504,
+      "share_pct": 40.43
+    },
+    "top_age_group": {
+      "code": "age25-34",
+      "label": "25-34",
+      "viewer_pct": 36.0
+    },
+    "female_pct": 68.0,
+    "male_pct": 31.0,
+    "mobile_share_pct": 71.0,
+    "shorts_view_share_pct": 57.0,
+    "subscriber_growth_pct": 61.3,
+    "subscriber_growth_window": "2025-12..2026-10"
+  },
+  "performance": {
+    "views": {
+      "value": 125010,
+      "previous": 122972,
+      "change_pct": 1.7
+    },
+    "engaged_views": {
+      "value": 105009,
+      "previous": 103296,
+      "change_pct": 1.7
+    },
+    "watch_time_hours": {
+      "value": 5000.4,
+      "previous": 4918.9,
+      "change_pct": 1.7
+    },
+    "average_view_duration_s": {
+      "value": 131.54,
+      "previous": 131.54,
+      "change_pct": 0.0
+    },
+    "average_view_percentage": {
+      "value": 47.73,
+      "previous": 47.73,
+      "change_pct": 0.0
+    },
+    "subscribers_gained": {
+      "value": 2213,
+      "previous": 2177,
+      "change_pct": 1.7
+    },
+    "subscribers_lost": {
+      "value": 525,
+      "previous": 516,
+      "change_pct": 1.7
+    },
+    "net_subscribers": {
+      "value": 1688,
+      "previous": 1661,
+      "change_pct": 1.6
+    },
+    "likes": {
+      "value": 6000,
+      "previous": 5903,
+      "change_pct": 1.6
+    },
+    "comments": {
+      "value": 513,
+      "previous": 504,
+      "change_pct": 1.8
+    },
+    "shares": {
+      "value": 400,
+      "previous": 394,
+      "change_pct": 1.5
+    },
+    "engagement_rate_pct": {
+      "value": 5.53,
+      "previous": 5.53,
+      "change_pct": 0.0
+    }
+  },
+  "performance_by_content_type": {
+    "videos": {
+      "views": {
+        "value": 51256,
+        "previous": 50420,
+        "change_pct": 1.7
+      },
+      "engaged_views": {
+        "value": 43053,
+        "previous": 42352,
+        "change_pct": 1.7
+      },
+      "likes": {
+        "value": 2458,
+        "previous": 2422,
+        "change_pct": 1.5
+      },
+      "net_subscribers": {
+        "value": 695,
+        "previous": 680,
+        "change_pct": 2.2
+      },
+      "watch_time_hours": {
+        "value": 4356.6,
+        "previous": 4285.6,
+        "change_pct": 1.7
+      },
+      "average_view_duration_s": {
+        "value": 302.7898,
+        "previous": 305.0994,
+        "change_pct": -0.8
+      },
+      "impressions": {
+        "value": 254303,
+        "previous": 258908,
+        "change_pct": -1.8
+      },
+      "impressions_ctr_pct": {
+        "value": 5.93,
+        "previous": 6.01,
+        "change_pct": -1.3
+      }
+    },
+    "shorts": {
+      "views": {
+        "value": 71256,
+        "previous": 70095,
+        "change_pct": 1.7
+      },
+      "engaged_views": {
+        "value": 59852,
+        "previous": 58878,
+        "change_pct": 1.7
+      },
+      "likes": {
+        "value": 3419,
+        "previous": 3365,
+        "change_pct": 1.6
+      },
+      "net_subscribers": {
+        "value": 966,
+        "previous": 946,
+        "change_pct": 2.1
+      },
+      "watch_time_hours": {
+        "value": 451.3,
+        "previous": 443.9,
+        "change_pct": 1.7
+      },
+      "average_view_duration_s": {
+        "value": 23.0585,
+        "previous": 23.3437,
+        "change_pct": -1.2
+      },
+      "impressions": {
+        "value": 302261,
+        "previous": 303264,
+        "change_pct": -0.3
+      },
+      "impressions_ctr_pct": {
+        "value": 5.81,
+        "previous": 6.06,
+        "change_pct": -4.1
+      }
+    }
+  },
+  "impressions_funnel": {
+    "impressions": 638001,
+    "impressions_ctr_pct": 5.89,
+    "views_from_impressions": 37578,
+    "average_view_duration_s": null,
+    "watch_hours_from_impressions": null
+  },
+  "daily_trend": [
+    {
+      "date": "2026-10-12",
+      "views": 4641,
+      "views_videos": 1903,
+      "views_shorts": 2645,
+      "views_live": 93
+    },
+    {
+      "date": "2026-10-13",
+      "views": 5367,
+      "views_videos": 2201,
+      "views_shorts": 3059,
+      "views_live": 107
+    },
+    {
+      "date": "2026-10-14",
+      "views": 4899,
+      "views_videos": 2009,
+      "views_shorts": 2792,
+      "views_live": 98
+    },
+    {
+      "date": "2026-10-15",
+      "views": 3798,
+      "views_videos": 1557,
+      "views_shorts": 2165,
+      "views_live": 76
+    },
+    {
+      "date": "2026-10-16",
+      "views": 3355,
+      "views_videos": 1376,
+      "views_shorts": 1912,
+      "views_live": 67
+    },
+    {
+      "date": "2026-10-17",
+      "views": 3940,
+      "views_videos": 1615,
+      "views_shorts": 2246,
+      "views_live": 79
+    },
+    {
+      "date": "2026-10-18",
+      "views": 4791,
+      "views_videos": 1964,
+      "views_shorts": 2731,
+      "views_live": 96
+    },
+    {
+      "date": "2026-10-19",
+      "views": 4327,
+      "views_videos": 1774,
+      "views_shorts": 2466,
+      "views_live": 87
+    },
+    {
+      "date": "2026-10-20",
+      "views": 4900,
+      "views_videos": 2009,
+      "views_shorts": 2793,
+      "views_live": 98
+    },
+    {
+      "date": "2026-10-21",
+      "views": 4505,
+      "views_videos": 1847,
+      "views_shorts": 2568,
+      "views_live": 90
+    },
+    {
+      "date": "2026-10-22",
+      "views": 4221,
+      "views_videos": 1731,
+      "views_shorts": 2406,
+      "views_live": 84
+    },
+    {
+      "date": "2026-10-23",
+      "views": 3930,
+      "views_videos": 1611,
+      "views_shorts": 2240,
+      "views_live": 79
+    },
+    {
+      "date": "2026-10-24",
+      "views": 3833,
+      "views_videos": 1571,
+      "views_shorts": 2185,
+      "views_live": 77
+    },
+    {
+      "date": "2026-10-25",
+      "views": 3880,
+      "views_videos": 1591,
+      "views_shorts": 2211,
+      "views_live": 78
+    },
+    {
+      "date": "2026-10-26",
+      "views": 4597,
+      "views_videos": 1885,
+      "views_shorts": 2620,
+      "views_live": 92
+    },
+    {
+      "date": "2026-10-27",
+      "views": 5448,
+      "views_videos": 2234,
+      "views_shorts": 3105,
+      "views_live": 109
+    },
+    {
+      "date": "2026-10-28",
+      "views": 5527,
+      "views_videos": 2266,
+      "views_shorts": 3150,
+      "views_live": 111
+    },
+    {
+      "date": "2026-10-29",
+      "views": 4635,
+      "views_videos": 1900,
+      "views_shorts": 2642,
+      "views_live": 93
+    },
+    {
+      "date": "2026-10-30",
+      "views": 3412,
+      "views_videos": 1399,
+      "views_shorts": 1945,
+      "views_live": 68
+    },
+    {
+      "date": "2026-10-31",
+      "views": 4355,
+      "views_videos": 1786,
+      "views_shorts": 2482,
+      "views_live": 87
+    },
+    {
+      "date": "2026-11-01",
+      "views": 3929,
+      "views_videos": 1611,
+      "views_shorts": 2239,
+      "views_live": 79
+    },
+    {
+      "date": "2026-11-02",
+      "views": 5637,
+      "views_videos": 2311,
+      "views_shorts": 3213,
+      "views_live": 113
+    },
+    {
+      "date": "2026-11-03",
+      "views": 5622,
+      "views_videos": 2305,
+      "views_shorts": 3205,
+      "views_live": 112
+    },
+    {
+      "date": "2026-11-04",
+      "views": 4420,
+      "views_videos": 1812,
+      "views_shorts": 2520,
+      "views_live": 88
+    },
+    {
+      "date": "2026-11-05",
+      "views": 4841,
+      "views_videos": 1985,
+      "views_shorts": 2759,
+      "views_live": 97
+    },
+    {
+      "date": "2026-11-06",
+      "views": 3633,
+      "views_videos": 1489,
+      "views_shorts": 2071,
+      "views_live": 73
+    },
+    {
+      "date": "2026-11-07",
+      "views": 4413,
+      "views_videos": 1809,
+      "views_shorts": 2516,
+      "views_live": 88
+    },
+    {
+      "date": "2026-11-08",
+      "views": 4158,
+      "views_videos": 1705,
+      "views_shorts": 2370,
+      "views_live": 83
+    }
+  ],
+  "monthly_trend": [
+    {
+      "period": "2025-12",
+      "views": 113841,
+      "watch_hours": 4553.6,
+      "subscribers_gained": 2015,
+      "subscribers_lost": 479,
+      "net_subscribers": 1536,
+      "total_subscribers": 31225,
+      "partial": false
+    },
+    {
+      "period": "2026-01",
+      "views": 112113,
+      "watch_hours": 4484.5,
+      "subscribers_gained": 1985,
+      "subscribers_lost": 471,
+      "net_subscribers": 1514,
+      "total_subscribers": 32739,
+      "partial": false
+    },
+    {
+      "period": "2026-02",
+      "views": 101697,
+      "watch_hours": 4068.0,
+      "subscribers_gained": 1799,
+      "subscribers_lost": 429,
+      "net_subscribers": 1370,
+      "total_subscribers": 34109,
+      "partial": false
+    },
+    {
+      "period": "2026-03",
+      "views": 118763,
+      "watch_hours": 4750.6,
+      "subscribers_gained": 2098,
+      "subscribers_lost": 500,
+      "net_subscribers": 1598,
+      "total_subscribers": 35707,
+      "partial": false
+    },
+    {
+      "period": "2026-04",
+      "views": 121052,
+      "watch_hours": 4842.1,
+      "subscribers_gained": 2141,
+      "subscribers_lost": 508,
+      "net_subscribers": 1633,
+      "total_subscribers": 37340,
+      "partial": false
+    },
+    {
+      "period": "2026-05",
+      "views": 126002,
+      "watch_hours": 5040.1,
+      "subscribers_gained": 2229,
+      "subscribers_lost": 527,
+      "net_subscribers": 1702,
+      "total_subscribers": 39042,
+      "partial": false
+    },
+    {
+      "period": "2026-06",
+      "views": 122422,
+      "watch_hours": 4896.9,
+      "subscribers_gained": 2165,
+      "subscribers_lost": 516,
+      "net_subscribers": 1649,
+      "total_subscribers": 40691,
+      "partial": false
+    },
+    {
+      "period": "2026-07",
+      "views": 129564,
+      "watch_hours": 5182.5,
+      "subscribers_gained": 2295,
+      "subscribers_lost": 545,
+      "net_subscribers": 1750,
+      "total_subscribers": 42441,
+      "partial": false
+    },
+    {
+      "period": "2026-08",
+      "views": 134042,
+      "watch_hours": 5361.6,
+      "subscribers_gained": 2371,
+      "subscribers_lost": 564,
+      "net_subscribers": 1807,
+      "total_subscribers": 44248,
+      "partial": false
+    },
+    {
+      "period": "2026-09",
+      "views": 134598,
+      "watch_hours": 5383.9,
+      "subscribers_gained": 2382,
+      "subscribers_lost": 567,
+      "net_subscribers": 1815,
+      "total_subscribers": 46063,
+      "partial": false
+    },
+    {
+      "period": "2026-10",
+      "views": 135022,
+      "watch_hours": 5400.9,
+      "subscribers_gained": 2391,
+      "subscribers_lost": 566,
+      "net_subscribers": 1825,
+      "total_subscribers": 47888,
+      "partial": false
+    },
+    {
+      "period": "2026-11",
+      "views": 36652,
+      "watch_hours": 1466.1,
+      "subscribers_gained": 650,
+      "subscribers_lost": 155,
+      "net_subscribers": 495,
+      "total_subscribers": 48383,
+      "partial": true
+    }
+  ],
+  "audience": {
+    "age": [
+      {
+        "code": "age13-17",
+        "label": "13-17",
+        "viewer_pct": 4.0
+      },
+      {
+        "code": "age18-24",
+        "label": "18-24",
+        "viewer_pct": 22.0
+      },
+      {
+        "code": "age25-34",
+        "label": "25-34",
+        "viewer_pct": 36.0
+      },
+      {
+        "code": "age35-44",
+        "label": "35-44",
+        "viewer_pct": 20.0
+      },
+      {
+        "code": "age45-54",
+        "label": "45-54",
+        "viewer_pct": 10.0
+      },
+      {
+        "code": "age55-64",
+        "label": "55-64",
+        "viewer_pct": 5.0
+      },
+      {
+        "code": "age65-",
+        "label": "65+",
+        "viewer_pct": 3.0
+      }
+    ],
+    "gender": [
+      {
+        "code": "female",
+        "label": "Female",
+        "viewer_pct": 68.0
+      },
+      {
+        "code": "male",
+        "label": "Male",
+        "viewer_pct": 31.0
+      },
+      {
+        "code": "user_specified",
+        "label": "User-specified",
+        "viewer_pct": 1.0
+      }
+    ],
+    "countries": [
+      {
+        "code": "US",
+        "views": 47504,
+        "share_pct": 40.43
+      },
+      {
+        "code": "FR",
+        "views": 26252,
+        "share_pct": 22.34
+      },
+      {
+        "code": "CA",
+        "views": 11251,
+        "share_pct": 9.57
+      },
+      {
+        "code": "GB",
+        "views": 8751,
+        "share_pct": 7.45
+      },
+      {
+        "code": "BE",
+        "views": 6251,
+        "share_pct": 5.32
+      },
+      {
+        "code": "CH",
+        "views": 5000,
+        "share_pct": 4.25
+      },
+      {
+        "code": "DE",
+        "views": 3750,
+        "share_pct": 3.19
+      },
+      {
+        "code": "AU",
+        "views": 3750,
+        "share_pct": 3.19
+      }
+    ],
+    "devices": [
+      {
+        "code": "MOBILE",
+        "label": "Mobile phone",
+        "views": 88757,
+        "share_pct": 71.0
+      },
+      {
+        "code": "TV",
+        "label": "TV",
+        "views": 17501,
+        "share_pct": 14.0
+      },
+      {
+        "code": "DESKTOP",
+        "label": "Computer",
+        "views": 15001,
+        "share_pct": 12.0
+      },
+      {
+        "code": "TABLET",
+        "label": "Tablet",
+        "views": 3750,
+        "share_pct": 3.0
+      }
+    ],
+    "subscribed_status": [
+      {
+        "code": "UNSUBSCRIBED",
+        "label": "Not subscribed",
+        "views": 90007,
+        "share_pct": 72.0
+      },
+      {
+        "code": "SUBSCRIBED",
+        "label": "Subscribers",
+        "views": 35003,
+        "share_pct": 28.0
+      }
+    ],
+    "content_type": [
+      {
+        "code": "SHORTS",
+        "label": "Shorts",
+        "views": 71256,
+        "share_pct": 57.0
+      },
+      {
+        "code": "VIDEO_ON_DEMAND",
+        "label": "Videos",
+        "views": 51254,
+        "share_pct": 41.0
+      },
+      {
+        "code": "LIVE_STREAM",
+        "label": "Live",
+        "views": 2500,
+        "share_pct": 2.0
+      }
+    ]
+  },
+  "recent_uploads": {
+    "min_age_days": 7,
+    "videos": {
+      "count": 6,
+      "avg_views": 33455,
+      "median_views": 30262,
+      "avg_engagement_pct": 5.4,
+      "items": [
+        {
+          "video_id": "vid00000002",
+          "title": "A slow Sunday studio vlog",
+          "url": "https://www.youtube.com/watch?v=vid00000002",
+          "published_at": "2026-11-01T16:00:00Z",
+          "thumbnail_url": "https://i.ytimg.com/vi/vid00000002/hqdefault.jpg",
+          "duration_s": 674,
+          "views": 24259,
+          "likes": 1212,
+          "comments": 97,
+          "engagement_rate_pct": 5.4
+        },
+        {
+          "video_id": "vid00000004",
+          "title": "My honest review after 6 months",
+          "url": "https://www.youtube.com/watch?v=vid00000004",
+          "published_at": "2026-10-24T16:00:00Z",
+          "thumbnail_url": "https://i.ytimg.com/vi/vid00000004/hqdefault.jpg",
+          "duration_s": 868,
+          "views": 26357,
+          "likes": 1317,
+          "comments": 105,
+          "engagement_rate_pct": 5.4
+        },
+        {
+          "video_id": "vid00000006",
+          "title": "Studio tour 2026",
+          "url": "https://www.youtube.com/watch?v=vid00000006",
+          "published_at": "2026-10-16T16:00:00Z",
+          "thumbnail_url": "https://i.ytimg.com/vi/vid00000006/hqdefault.jpg",
+          "duration_s": 1062,
+          "views": 30772,
+          "likes": 1538,
+          "comments": 123,
+          "engagement_rate_pct": 5.4
+        },
+        {
+          "video_id": "vid00000008",
+          "title": "Answering your most asked questions",
+          "url": "https://www.youtube.com/watch?v=vid00000008",
+          "published_at": "2026-10-08T16:00:00Z",
+          "thumbnail_url": "https://i.ytimg.com/vi/vid00000008/hqdefault.jpg",
+          "duration_s": 1256,
+          "views": 46803,
+          "likes": 2340,
+          "comments": 187,
+          "engagement_rate_pct": 5.4
+        },
+        {
+          "video_id": "vid00000010",
+          "title": "How I plan a whole month of content in one afternoon",
+          "url": "https://www.youtube.com/watch?v=vid00000010",
+          "published_at": "2026-09-30T16:00:00Z",
+          "thumbnail_url": "https://i.ytimg.com/vi/vid00000010/hqdefault.jpg",
+          "duration_s": 550,
+          "views": 29753,
+          "likes": 1487,
+          "comments": 119,
+          "engagement_rate_pct": 5.4
+        },
+        {
+          "video_id": "vid00000012",
+          "title": "A slow Sunday studio vlog",
+          "url": "https://www.youtube.com/watch?v=vid00000012",
+          "published_at": "2026-09-22T16:00:00Z",
+          "thumbnail_url": "https://i.ytimg.com/vi/vid00000012/hqdefault.jpg",
+          "duration_s": 744,
+          "views": 42786,
+          "likes": 2139,
+          "comments": 171,
+          "engagement_rate_pct": 5.4
+        }
+      ]
+    },
+    "shorts": {
+      "count": 6,
+      "avg_views": 26453,
+      "median_views": 26210,
+      "avg_engagement_pct": 5.4,
+      "items": [
+        {
+          "video_id": "vid00000003",
+          "title": "#shorts Testing viral hacks so you don't have to",
+          "url": "https://www.youtube.com/watch?v=vid00000003",
+          "published_at": "2026-10-28T16:00:00Z",
+          "thumbnail_url": "https://i.ytimg.com/vi/vid00000003/hqdefault.jpg",
+          "duration_s": 41,
+          "views": 17617,
+          "likes": 880,
+          "comments": 70,
+          "engagement_rate_pct": 5.39
+        },
+        {
+          "video_id": "vid00000005",
+          "title": "#shorts The easiest project for complete beginners",
+          "url": "https://www.youtube.com/watch?v=vid00000005",
+          "published_at": "2026-10-20T16:00:00Z",
+          "thumbnail_url": "https://i.ytimg.com/vi/vid00000005/hqdefault.jpg",
+          "duration_s": 55,
+          "views": 33351,
+          "likes": 1667,
+          "comments": 133,
+          "engagement_rate_pct": 5.4
+        },
+        {
+          "video_id": "vid00000007",
+          "title": "#shorts What I earned from my first year on YouTube",
+          "url": "https://www.youtube.com/watch?v=vid00000007",
+          "published_at": "2026-10-12T16:00:00Z",
+          "thumbnail_url": "https://i.ytimg.com/vi/vid00000007/hqdefault.jpg",
+          "duration_s": 29,
+          "views": 36396,
+          "likes": 1819,
+          "comments": 145,
+          "engagement_rate_pct": 5.4
+        },
+        {
+          "video_id": "vid00000009",
+          "title": "#shorts Trying a new technique live",
+          "url": "https://www.youtube.com/watch?v=vid00000009",
+          "published_at": "2026-10-04T16:00:00Z",
+          "thumbnail_url": "https://i.ytimg.com/vi/vid00000009/hqdefault.jpg",
+          "duration_s": 43,
+          "views": 28772,
+          "likes": 1438,
+          "comments": 115,
+          "engagement_rate_pct": 5.4
+        },
+        {
+          "video_id": "vid00000011",
+          "title": "#shorts 5 beginner mistakes I wish I'd known",
+          "url": "https://www.youtube.com/watch?v=vid00000011",
+          "published_at": "2026-09-26T16:00:00Z",
+          "thumbnail_url": "https://i.ytimg.com/vi/vid00000011/hqdefault.jpg",
+          "duration_s": 57,
+          "views": 18934,
+          "likes": 946,
+          "comments": 75,
+          "engagement_rate_pct": 5.39
+        },
+        {
+          "video_id": "vid00000015",
+          "title": "#shorts The easiest project for complete beginners",
+          "url": "https://www.youtube.com/watch?v=vid00000015",
+          "published_at": "2026-09-10T16:00:00Z",
+          "thumbnail_url": "https://i.ytimg.com/vi/vid00000015/hqdefault.jpg",
+          "duration_s": 45,
+          "views": 23649,
+          "likes": 1182,
+          "comments": 94,
+          "engagement_rate_pct": 5.4
+        }
+      ]
+    }
+  },
+  "top_videos": [
+    {
+      "rank": 1,
+      "video_id": "vid00000001",
+      "title": "#shorts 5 beginner mistakes I wish I'd known",
+      "url": "https://www.youtube.com/watch?v=vid00000001",
+      "thumbnail_url": "https://i.ytimg.com/vi/vid00000001/hqdefault.jpg",
+      "published_at": "2026-11-05T16:00:00Z",
+      "content_type": "Shorts",
+      "views": 22256,
+      "watch_time_hours": 140.9,
+      "average_view_duration_s": 24.47,
+      "likes": 1068,
+      "comments": 91,
+      "engagement_rate_pct": 5.53
+    },
+    {
+      "rank": 2,
+      "video_id": "vid00000002",
+      "title": "A slow Sunday studio vlog",
+      "url": "https://www.youtube.com/watch?v=vid00000002",
+      "thumbnail_url": "https://i.ytimg.com/vi/vid00000002/hqdefault.jpg",
+      "published_at": "2026-11-01T16:00:00Z",
+      "content_type": "Videos",
+      "views": 11927,
+      "watch_time_hours": 1013.8,
+      "average_view_duration_s": 321.11,
+      "likes": 572,
+      "comments": 49,
+      "engagement_rate_pct": 5.53
+    },
+    {
+      "rank": 3,
+      "video_id": "vid00000003",
+      "title": "#shorts Testing viral hacks so you don't have to",
+      "url": "https://www.youtube.com/watch?v=vid00000003",
+      "thumbnail_url": "https://i.ytimg.com/vi/vid00000003/hqdefault.jpg",
+      "published_at": "2026-10-28T16:00:00Z",
+      "content_type": "Shorts",
+      "views": 8280,
+      "watch_time_hours": 52.4,
+      "average_view_duration_s": 22.51,
+      "likes": 397,
+      "comments": 34,
+      "engagement_rate_pct": 5.52
+    },
+    {
+      "rank": 4,
+      "video_id": "vid00000004",
+      "title": "My honest review after 6 months",
+      "url": "https://www.youtube.com/watch?v=vid00000004",
+      "thumbnail_url": "https://i.ytimg.com/vi/vid00000004/hqdefault.jpg",
+      "published_at": "2026-10-24T16:00:00Z",
+      "content_type": "Videos",
+      "views": 6391,
+      "watch_time_hours": 543.3,
+      "average_view_duration_s": 326.66,
+      "likes": 307,
+      "comments": 26,
+      "engagement_rate_pct": 5.52
+    },
+    {
+      "rank": 5,
+      "video_id": "vid00000005",
+      "title": "#shorts The easiest project for complete beginners",
+      "url": "https://www.youtube.com/watch?v=vid00000005",
+      "thumbnail_url": "https://i.ytimg.com/vi/vid00000005/hqdefault.jpg",
+      "published_at": "2026-10-20T16:00:00Z",
+      "content_type": "Shorts",
+      "views": 5228,
+      "watch_time_hours": 33.1,
+      "average_view_duration_s": 21.3,
+      "likes": 251,
+      "comments": 21,
+      "engagement_rate_pct": 5.53
+    }
+  ],
+  "traffic_sources": [
+    {
+      "code": "SHORTS",
+      "label": "Shorts feed",
+      "views": 52504,
+      "share_pct": 42.0
+    },
+    {
+      "code": "SUBSCRIBER",
+      "label": "Browse features (home, subscriptions)",
+      "views": 26252,
+      "share_pct": 21.0
+    },
+    {
+      "code": "RELATED_VIDEO",
+      "label": "Suggested videos",
+      "views": 17501,
+      "share_pct": 14.0
+    },
+    {
+      "code": "YT_SEARCH",
+      "label": "YouTube search",
+      "views": 11251,
+      "share_pct": 9.0
+    },
+    {
+      "code": "YT_CHANNEL",
+      "label": "Channel pages",
+      "views": 6251,
+      "share_pct": 5.0
+    },
+    {
+      "code": "NO_LINK_OTHER",
+      "label": "Direct or unknown",
+      "views": 5000,
+      "share_pct": 4.0
+    },
+    {
+      "code": "EXT_URL",
+      "label": "External websites & apps",
+      "views": 2500,
+      "share_pct": 2.0
+    },
+    {
+      "code": "PLAYLIST",
+      "label": "Playlists",
+      "views": 2500,
+      "share_pct": 2.0
+    }
+  ],
+  "unavailable": {
+    "views_last_48_hours": "YouTube's APIs have no realtime or hourly data (Studio's 48-hour card).",
+    "impressions_funnel.watch_metrics": "Average view duration and watch time from impressions are Studio-only (no API source)."
+  },
+  "notes": [
+    "Dates are US Pacific time. Analytics lag 2-3 days, so the period ends at data_through, a few days before generated_at; Studio's live numbers will be slightly higher.",
+    "channel.subscribers is YouTube's public count, rounded down to 3 significant figures above 1,000. subscribers_from_analytics = lifetime gained - lost through data_through (exact, but can differ slightly from Studio's live count).",
+    "All *_pct values are 0-100; *_s values are seconds. Audience age/gender are shares of logged-in viewers. engagement_rate_pct = (likes + comments + shares) / views.",
+    "Traffic source codes are YouTube's insightTrafficSourceType values (SUBSCRIBER = Browse features)."
+  ]
+}

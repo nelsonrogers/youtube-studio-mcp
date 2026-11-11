@@ -1,0 +1,16 @@
+name: Feature request
+description: Suggest a new tool, metric or improvement
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What are you trying to do?
+      description: Describe the creator workflow or question you want your agent to handle.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed tool or change
+      description: If you know the YouTube API report/metric involved, link it.

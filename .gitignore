@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+
+# Tooling caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Editors / OS
+.idea/
+.vscode/
+.DS_Store
+
+# Never commit Google OAuth secrets or tokens
+client_secret*.json
+token*.json
+credentials*.json
+*.token.json
+
+# Local outputs
+youtube-studio-mcp-output/
+
+# Script scratch folders
+.sample-config/
+.sample-out/
+.docs-config/
+.docs-out/

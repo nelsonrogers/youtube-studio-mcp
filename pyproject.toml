@@ -1,0 +1,107 @@
+[project]
+name = "youtube-studio-mcp"
+version = "0.1.0"
+description = "Local MCP server that gives AI agents your YouTube Studio data: analytics, audience, traffic, retention, revenue, comments, media-kit stats and ready-to-use charts."
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Nelson Rogers" }]
+requires-python = ">=3.11"
+keywords = [
+  "mcp",
+  "model-context-protocol",
+  "youtube",
+  "youtube-analytics",
+  "youtube-studio",
+  "creator",
+  "analytics",
+  "media-kit",
+  "claude",
+  "ai-agents",
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Environment :: Console",
+  "Intended Audience :: End Users/Desktop",
+  "Intended Audience :: Developers",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+  "Topic :: Multimedia :: Video",
+  "Topic :: Scientific/Engineering :: Visualization",
+  "Typing :: Typed",
+]
+dependencies = [
+  "mcp>=2.3,<3",
+  "google-api-python-client>=2.150",
+  "google-auth>=2.35",
+  "google-auth-oauthlib>=1.2",
+  "matplotlib>=3.9",
+  "tzdata>=2024.1; sys_platform == 'win32'",
+]
+
+[project.urls]
+Homepage = "https://github.com/nelsonrogers/youtube-studio-mcp"
+Repository = "https://github.com/nelsonrogers/youtube-studio-mcp"
+Issues = "https://github.com/nelsonrogers/youtube-studio-mcp/issues"
+Changelog = "https://github.com/nelsonrogers/youtube-studio-mcp/blob/main/CHANGELOG.md"
+
+[project.scripts]
+youtube-studio-mcp = "youtube_studio_mcp.cli:main"
+
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.sdist]
+include = ["src", "tests", "docs", "README.md", "CHANGELOG.md", "LICENSE"]
+
+[dependency-groups]
+dev = [
+  "pytest>=8.3",
+  "ruff>=0.8",
+  "mypy>=1.13",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra --strict-markers"
+filterwarnings = ["error::pytest.PytestUnraisableExceptionWarning"]
+
+[tool.ruff]
+line-length = 110
+target-version = "py311"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "BLE", "UP", "SIM", "RUF", "C4", "PTH", "N", "S", "T20"]
+ignore = [
+  "S101", # assert is fine in tests
+  "RUF001", # allow typographic characters in strings (e.g. en dash in labels)
+  "RUF002",
+  "E501", # the formatter owns line length; long string literals are fine
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["S", "PTH", "T20", "N802"] # fake API handlers mirror camelCase API method names
+"scripts/**" = ["T20"]
+"src/youtube_studio_mcp/{cli,selfcheck}.py" = ["T20"] # these talk to a human on a terminal
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+warn_unreachable = true
+files = ["src"]
+
+[[tool.mypy.overrides]]
+module = ["googleapiclient.*", "google_auth_oauthlib.*", "google.auth.*", "google.oauth2.*", "matplotlib.*"]
+ignore_missing_imports = true
+
+# google-auth and matplotlib ship partial type hints; calling into them is fine.
+[[tool.mypy.overrides]]
+module = ["youtube_studio_mcp.auth", "youtube_studio_mcp.youtube", "youtube_studio_mcp.charts"]
+disallow_untyped_calls = false
